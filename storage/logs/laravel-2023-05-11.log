@@ -1,0 +1,11 @@
+[2023-05-11 16:43:34] live.EMERGENCY: File:/home/farmchoi/public_html/office/app/Utils/TransactionUtil.phpLine:1395Message:Trying to get property 'amount' of non-object  
+[2023-05-11 16:43:42] live.EMERGENCY: File:/home/farmchoi/public_html/office/app/Utils/TransactionUtil.phpLine:1395Message:Trying to get property 'amount' of non-object  
+[2023-05-11 16:43:47] live.EMERGENCY: File:/home/farmchoi/public_html/office/app/Utils/TransactionUtil.phpLine:1395Message:Trying to get property 'amount' of non-object  
+[2023-05-11 16:43:56] live.EMERGENCY: File:/home/farmchoi/public_html/office/app/Utils/TransactionUtil.phpLine:1395Message:Trying to get property 'amount' of non-object  
+[2023-05-11 16:45:19] live.EMERGENCY: File:/home/farmchoi/public_html/office/app/Utils/TransactionUtil.phpLine:1395Message:Trying to get property 'amount' of non-object  
+[2023-05-11 16:45:26] live.EMERGENCY: File:/home/farmchoi/public_html/office/app/Utils/TransactionUtil.phpLine:1395Message:Trying to get property 'amount' of non-object  
+[2023-05-11 16:45:44] live.EMERGENCY: File:/home/farmchoi/public_html/office/app/Utils/TransactionUtil.phpLine:1395Message:Trying to get property 'amount' of non-object  
+[2023-05-11 16:45:49] live.EMERGENCY: File:/home/farmchoi/public_html/office/app/Utils/TransactionUtil.phpLine:1395Message:Trying to get property 'amount' of non-object  
+[2023-05-11 16:45:54] live.EMERGENCY: File:/home/farmchoi/public_html/office/app/Utils/TransactionUtil.phpLine:1395Message:Trying to get property 'amount' of non-object  
+[2023-05-11 18:27:07] live.EMERGENCY: File:/home/farmchoi/public_html/office/app/Utils/TransactionUtil.phpLine:4000Message:Trying to get property 'id' of non-object  
+[2023-05-11 19:09:02] live.EMERGENCY: File:/home/farmchoi/public_html/office/app/Utils/TransactionUtil.phpLine:4000Message:Trying to get property 'id' of non-object  

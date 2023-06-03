@@ -1,0 +1,8 @@
+[19-Dec-2021 23:11:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/mololine/public_html/office/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/mololine/public_html/office/config/database.php on line 18
+[19-Dec-2021 23:11:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function public_path() in /home/mololine/public_html/office/config/barcode.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/mololine/public_html/office/config/barcode.php on line 4

@@ -1,0 +1,4 @@
+[19-Dec-2021 23:13:59 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Database\Eloquent\Model' not found in /home/mololine/public_html/office/app/InvoiceLayout.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/mololine/public_html/office/app/InvoiceLayout.php on line 7

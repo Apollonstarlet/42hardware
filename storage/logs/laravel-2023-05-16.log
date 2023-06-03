@@ -1,0 +1,1 @@
+[2023-05-16 15:13:01] live.EMERGENCY: File:/home/farmchoi/public_html/office/app/Utils/TransactionUtil.phpLine:1395Message:Trying to get property 'amount' of non-object  
