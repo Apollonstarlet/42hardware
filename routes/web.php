@@ -13,6 +13,20 @@
 
 include_once('install_r.php');
 
+//Cache Clear
+Route::get('clear-cache', function() {
+    $exitCode = Artisan::call('config:clear');
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('view:clear');
+    $exitCode = Artisan::call('route:clear');
+    return 'DONE'; //Return anything
+});
+//migrate
+Route::get('fresh', function() {
+    $exitCode = Artisan::call('migrate:fresh');
+    return 'DONE'; //Return anything
+});
+
 Route::middleware(['authh'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
