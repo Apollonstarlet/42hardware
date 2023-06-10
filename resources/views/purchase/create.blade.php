@@ -22,27 +22,19 @@
 	{!! Form::open(['url' => action('PurchaseController@store'), 'method' => 'post', 'id' => 'add_purchase_form', 'files' => true ]) !!}
 	@component('components.widget', ['class' => 'box-primary'])
 		<div class="row">
-			<div class="@if(!empty($default_purchase_status)) col-sm-4 @else col-sm-3 @endif">
-				<div class="form-group">
-					{!! Form::label('supplier_id', __('purchase.supplier') . ':*') !!}
-					<div class="input-group">
-						<span class="input-group-addon">
-							<i class="fa fa-user"></i>
-						</span>
-						{!! Form::select('contact_id', [], null, ['class' => 'form-control', 'placeholder' => __('messages.please_select'), 'required', 'id' => 'supplier_id']); !!}
-						<span class="input-group-btn">
-							<button type="button" class="btn btn-default bg-white btn-flat add_new_supplier" data-name=""><i class="fa fa-plus-circle text-primary fa-lg"></i></button>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div class="@if(!empty($default_purchase_status)) col-sm-4 @else col-sm-3 @endif">
+			<div class="col-sm-4">
 				<div class="form-group">
 					{!! Form::label('ref_no', __('purchase.ref_no').':') !!}
 					{!! Form::text('ref_no', null, ['class' => 'form-control']); !!}
 				</div>
-			</div>
-			<div class="@if(!empty($default_purchase_status)) col-sm-4 @else col-sm-3 @endif">
+				<div class="form-group">
+					{!! Form::label('req_class', __('purchase.req_class').':*') !!}
+					{!! Form::text('req_class', null, ['class' => 'form-control', 'required']); !!}
+				</div>
+				<div class="form-group">
+					{!! Form::label('status', __('purchase.purchase_status') . ':*') !!} @show_tooltip(__('tooltip.order_status'))
+					{!! Form::select('status', $orderStatuses, $default_purchase_status, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']); !!}
+				</div>
 				<div class="form-group">
 					{!! Form::label('transaction_date', __('purchase.purchase_date') . ':*') !!}
 					<div class="input-group">
@@ -53,76 +45,49 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-3 @if(!empty($default_purchase_status)) hide @endif">
+			<div class="col-sm-4">
 				<div class="form-group">
-					{!! Form::label('status', __('purchase.purchase_status') . ':*') !!} @show_tooltip(__('tooltip.order_status'))
-					{!! Form::select('status', $orderStatuses, $default_purchase_status, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']); !!}
+					{!! Form::label('priority', __('purchase.priority') . ':') !!} 
+					{!! Form::select('priority', ['Nomarl', 'Urgent', 'High'], null, ['class' => 'form-control select2']); !!}
+				</div>
+				<div class="form-group">
+					{!! Form::label('req_by', __('purchase.req_by').':*') !!}
+					{!! Form::text('req_by', null, ['class' => 'form-control', 'required']); !!}
+				</div>
+				@if(count($business_locations) == 1)
+					@php 
+						$default_location = current(array_keys($business_locations->toArray()));
+						$search_disable = false; 
+					@endphp
+				@else
+					@php $default_location = null;
+					$search_disable = true;
+					@endphp
+				@endif
+				<div class="form-group">
+					{!! Form::label('location_id', __('purchase.business_location') . ':') !!} @show_tooltip(__('tooltip.purchase_location'))
+					{!! Form::select('location_id[]', $business_locations, $default_location, ['class' => 'form-control select2', 'multiple', 'id' => 'location_id']); !!}
+				</div>
+				<div class="form-group">
+					{!! Form::label('department', __('purchase.department').':*') !!}
+					{!! Form::text('department', null, ['class' => 'form-control' ]); !!}
 				</div>
 			</div>
-
-			<div class="clearfix"></div>
-			
-			@if(count($business_locations) == 1)
-				@php 
-					$default_location = current(array_keys($business_locations->toArray()));
-					$search_disable = false; 
-				@endphp
-			@else
-				@php $default_location = null;
-				$search_disable = true;
-				@endphp
-			@endif
-			<div class="col-sm-3">
+			<div class="col-sm-4">
 				<div class="form-group">
-					{!! Form::label('location_id', __('purchase.business_location').':*') !!}
-					@show_tooltip(__('tooltip.purchase_location'))
-					{!! Form::select('location_id', $business_locations, $default_location, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']); !!}
-				</div>
-			</div>
-
-			<!-- Currency Exchange Rate -->
-			<div class="col-sm-3 @if(!$currency_details->purchase_in_diff_currency) hide @endif">
-				<div class="form-group">
-					{!! Form::label('exchange_rate', __('purchase.p_exchange_rate') . ':*') !!}
-					@show_tooltip(__('tooltip.currency_exchange_factor'))
+					{!! Form::label('currency_op', __('purchase.currency_op') . ':') !!}
 					<div class="input-group">
 						<span class="input-group-addon">
-							<i class="fa fa-info"></i>
+							<i class="fas fa-money-bill-alt"></i>
 						</span>
-						{!! Form::number('exchange_rate', $currency_details->p_exchange_rate, ['class' => 'form-control', 'required', 'step' => 0.001]); !!}
+						{!! Form::select('currency_op', ['USD', 'EUR', 'GBP'], null, ['class' => 'form-control select2']); !!}
 					</div>
-					<span class="help-block text-danger">
-						@lang('purchase.diff_purchase_currency_help', ['currency' => $currency_details->name])
-					</span>
+				</div>
+				<div class="form-group">
+					{!! Form::label('des', __('purchase.des').':*') !!}
+					{!! Form::textarea('des', null, ['class' => 'form-control', 'rows' => '8']); !!}
 				</div>
 			</div>
-
-			<div class="col-md-3">
-		          <div class="form-group">
-		            <div class="multi-input">
-		              {!! Form::label('pay_term_number', __('contact.pay_term') . ':') !!} @show_tooltip(__('tooltip.pay_term'))
-		              <br/>
-		              {!! Form::number('pay_term_number', null, ['class' => 'form-control width-40 pull-left', 'placeholder' => __('contact.pay_term')]); !!}
-
-		              {!! Form::select('pay_term_type', 
-		              	['months' => __('lang_v1.months'), 
-		              		'days' => __('lang_v1.days')], 
-		              		null, 
-		              	['class' => 'form-control width-60 pull-left','placeholder' => __('messages.please_select'), 'id' => 'pay_term_type']); !!}
-		            </div>
-		        </div>
-		    </div>
-
-			<div class="col-sm-3">
-                <div class="form-group">
-                    {!! Form::label('document', __('purchase.attach_document') . ':') !!}
-                    {!! Form::file('document', ['id' => 'upload_document', 'accept' => implode(',', array_keys(config('constants.document_upload_mimes_types')))]); !!}
-                    <p class="help-block">
-                    	@lang('purchase.max_file_size', ['size' => (config('constants.document_size_limit') / 1000000)])
-                    	@includeIf('components.document_help_text')
-                    </p>
-                </div>
-            </div>
 		</div>
 	@endcomponent
 
